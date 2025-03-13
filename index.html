@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Home Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@latest/font/lucide.min.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <h1>Smart Home</h1>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <i class="lucide-moon"></i>
+      </button>
+    </header>
+    
+    <main class="main-content">
+      <h2>Dashboard</h2>
+      
+      <div class="dashboard-grid">
+        <!-- Light Control Card -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="lucide-lightbulb"></i>
+              <span>Lights</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="light-toggle">
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="card-description">Control your home lights</div>
+          <div class="card-content">
+            <div class="control-group">
+              <div class="control-header">
+                <span>Brightness</span>
+                <span id="brightness-value">80%</span>
+              </div>
+              <div class="slider-container">
+                <input type="range" min="0" max="100" value="80" class="range-slider" id="brightness-slider">
+              </div>
+            </div>
+            <div class="status-row">
+              <span>Status</span>
+              <span id="light-status" class="status-off">Off</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- RGB Light Control Card -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="lucide-palette"></i>
+              <span>RGB Lights</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="rgb-toggle">
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="card-description">Control RGB lighting</div>
+          <div class="card-content">
+            <div class="control-group">
+              <div class="control-header">
+                <span>Color</span>
+                <span id="selected-color-preview" class="color-preview" style="background-color: #ff0000;"></span>
+              </div>
+              <div class="color-grid">
+                <button class="color-btn selected" style="background-color: #ff0000;" data-color="#ff0000"></button>
+                <button class="color-btn" style="background-color: #00ff00;" data-color="#00ff00"></button>
+                <button class="color-btn" style="background-color: #0000ff;" data-color="#0000ff"></button>
+                <button class="color-btn" style="background-color: #ffff00;" data-color="#ffff00"></button>
+                <button class="color-btn" style="background-color: #ff00ff;" data-color="#ff00ff"></button>
+                <button class="color-btn" style="background-color: #00ffff;" data-color="#00ffff"></button>
+                <button class="color-btn" style="background-color: #ffffff;" data-color="#ffffff"></button>
+              </div>
+            </div>
+            
+            <div class="control-group">
+              <div class="control-header">
+                <span>Brightness</span>
+                <span id="rgb-brightness-value">80%</span>
+              </div>
+              <div class="slider-container">
+                <input type="range" min="0" max="100" value="80" class="range-slider" id="rgb-brightness-slider">
+              </div>
+            </div>
+            
+            <div class="control-group">
+              <span>Effects</span>
+              <div class="button-grid">
+                <button class="control-btn" id="rainbow-btn">Rainbow</button>
+                <button class="control-btn" id="pulse-btn">Pulse</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- IR Control Card -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="lucide-satellite"></i>
+              <span>IR Control</span>
+            </div>
+          </div>
+          <div class="card-description">Control AC, TV and other IR devices</div>
+          <div class="card-content">
+            <div class="tabs">
+              <button class="tab-btn active" data-tab="ac">AC</button>
+              <button class="tab-btn" data-tab="tv">TV</button>
+            </div>
+            
+            <div class="tab-content active" id="ac-tab">
+              <div class="status-row">
+                <div class="device-title">
+                  <i class="lucide-snowflake"></i>
+                  <span>Air Conditioner</span>
+                </div>
+                <button class="power-btn" id="ac-power">
+                  <i class="lucide-power"></i>
+                </button>
+              </div>
+              
+              <div class="temperature-control">
+                <div class="temp-display">
+                  <i class="lucide-thermometer"></i>
+                  <span id="temperature">22°C</span>
+                </div>
+                <div class="temp-buttons">
+                  <button class="control-btn" id="temp-down">
+                    <i class="lucide-chevron-down"></i>
+                  </button>
+                  <button class="control-btn" id="temp-up">
+                    <i class="lucide-chevron-up"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="button-grid">
+                <button class="control-btn" id="cool-btn">Cool</button>
+                <button class="control-btn" id="heat-btn">Heat</button>
+                <button class="control-btn" id="fan-btn">Fan</button>
+                <button class="control-btn" id="auto-btn">Auto</button>
+              </div>
+            </div>
+            
+            <div class="tab-content" id="tv-tab">
+              <div class="status-row">
+                <span>Television</span>
+                <button class="power-btn" id="tv-power">
+                  <i class="lucide-power"></i>
+                </button>
+              </div>
+              
+              <!-- Fixed TV Remote Layout -->
+              <div class="tv-remote">
+                <!-- Power row -->
+                <div class="remote-row power-row">
+                  <button class="remote-btn power-btn-large" id="tv-power-main">
+                    <i class="lucide-power"></i>
+                  </button>
+                </div>
+                
+                <!-- Number pad -->
+                <div class="remote-row number-row">
+                  <button class="remote-btn">1</button>
+                  <button class="remote-btn">2</button>
+                  <button class="remote-btn">3</button>
+                </div>
+                <div class="remote-row number-row">
+                  <button class="remote-btn">4</button>
+                  <button class="remote-btn">5</button>
+                  <button class="remote-btn">6</button>
+                </div>
+                <div class="remote-row number-row">
+                  <button class="remote-btn">7</button>
+                  <button class="remote-btn">8</button>
+                  <button class="remote-btn">9</button>
+                </div>
+                <div class="remote-row number-row">
+                  <button class="remote-btn">0</button>
+                </div>
+                
+                <!-- Navigation pad -->
+                <div class="remote-row nav-row">
+                  <button class="remote-btn nav-btn up-btn">
+                    <i class="lucide-chevron-up"></i>
+                  </button>
+                </div>
+                <div class="remote-row nav-row">
+                  <button class="remote-btn nav-btn left-btn">
+                    <i class="lucide-chevron-left"></i>
+                  </button>
+                  <button class="remote-btn nav-btn ok-btn">OK</button>
+                  <button class="remote-btn nav-btn right-btn">
+                    <i class="lucide-chevron-right"></i>
+                  </button>
+                </div>
+                <div class="remote-row nav-row">
+                  <button class="remote-btn nav-btn down-btn">
+                    <i class="lucide-chevron-down"></i>
+                  </button>
+                </div>
+                
+                <!-- Volume and Channel controls -->
+                <div class="remote-row control-row">
+                  <div class="volume-controls">
+                    <button class="remote-btn">
+                      <i class="lucide-volume-1"></i>
+                    </button>
+                    <button class="remote-btn">
+                      <i class="lucide-volume-2"></i>
+                    </button>
+                  </div>
+                  <div class="channel-controls">
+                    <button class="remote-btn">CH-</button>
+                    <button class="remote-btn">CH+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gate Control Card -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="lucide-door-open"></i>
+              <span>Gate Control</span>
+            </div>
+          </div>
+          <div class="card-description">Control your home gates</div>
+          <div class="card-content">
+            <div class="status-row">
+              <span>Status</span>
+              <span id="gate-status" class="status-closed">
+                <i class="lucide-lock"></i>
+                Closed
+              </span>
+            </div>
+            
+            <div class="progress-container">
+              <div class="progress-bar" id="gate-progress"></div>
+            </div>
+            
+            <div class="button-grid">
+              <button class="control-btn" id="open-gate">
+                <i class="lucide-unlock"></i>
+                Open
+              </button>
+              <button class="control-btn" id="stop-gate" disabled>
+                Stop
+              </button>
+              <button class="control-btn" id="close-gate" disabled>
+                <i class="lucide-lock"></i>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
